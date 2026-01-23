@@ -14,6 +14,7 @@ import org.treebolic.TreebolicIface
 import org.treebolic.one.xml.R
 import org.treebolic.preference.OpenEditTextPreference
 import org.treebolic.preference.OpenEditTextPreference.Companion.onDisplayPreferenceDialog
+import org.treebolic.preference.R as PreferenceR
 
 /**
  * Settings activity
@@ -110,7 +111,7 @@ class SettingsActivity : AppCompatCommonPreferenceActivity() {
          */
         private val STRING_SUMMARY_PROVIDER = SummaryProvider { preference: Preference ->
             val value = preference.sharedPreferences!!.getString(preference.key, null)
-            value ?: preference.context.getString(R.string.pref_value_default)
+            value ?: preference.context.getString(PreferenceR.string.pref_value_default)
         }
     }
 }
