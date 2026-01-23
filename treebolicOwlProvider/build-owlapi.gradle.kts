@@ -29,13 +29,13 @@ kotlin {
 }
 
 dependencies {
-    implementation "io.github.treebolic:treebolic-model:${treebolicVersion}"
-    implementation "io.github.treebolic:treebolic-mutable:${treebolicVersion}"
-    implementation "io.github.treebolic:provider-owl-owlapi:${treebolicVersion}"
+    implementation("io.github.treebolic:treebolic-model:${treebolicVersion}")
+    implementation("io.github.treebolic:treebolic-mutable:${treebolicVersion}")
+    implementation("io.github.treebolic:provider-owl-owlapi:${treebolicVersion}")
 
-    implementation project(":treebolicGlue")
+    implementation(project(":treebolicGlue"))
 
-    implementation "androidx.annotation:annotation:1.9.1"
+    implementation("androidx.annotation:annotation:1.9.1")
 
     coreLibraryDesugaring(libs.desugar)
 }
