@@ -84,6 +84,5 @@ dependencies {
     implementation(libs.appcompat)
 
     implementation(libs.core.ktx)
-    implementation(libs.multidex)
     coreLibraryDesugaring(libs.desugar)
 }
