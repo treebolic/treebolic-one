@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-	<!-- snackbar -->
 	<color name="snackbar_color">#FF3765B1</color>
 
 </resources>
