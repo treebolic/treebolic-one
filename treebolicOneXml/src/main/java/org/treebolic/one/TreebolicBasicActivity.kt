@@ -20,10 +20,13 @@ import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.Toolbar
-import androidx.core.content.ContextCompat
+import androidx.core.content.edit
+import androidx.core.net.toUri
 import androidx.preference.PreferenceManager
 import com.google.android.material.snackbar.Snackbar
 import org.treebolic.AppCompatCommonActivity
+import org.treebolic.ColorUtils.fetchColor
+import org.treebolic.ColorUtils.fetchColors
 import org.treebolic.TreebolicIface
 import org.treebolic.guide.AboutActivity
 import org.treebolic.guide.HelpActivity
@@ -44,8 +47,7 @@ import treebolic.glue.component.Utils
 import java.net.MalformedURLException
 import java.net.URL
 import java.util.Properties
-import androidx.core.net.toUri
-import androidx.core.content.edit
+import com.google.android.material.R as MaterialR
 
 /**
  * Treebolic basic activity
@@ -68,7 +70,7 @@ abstract class TreebolicBasicActivity protected constructor(
             try {
                 return URL(base)
             } catch (_: MalformedURLException) {
-                
+
             }
         }
         return getURLPref(this, TreebolicIface.PREF_BASE)
@@ -84,7 +86,7 @@ abstract class TreebolicBasicActivity protected constructor(
             try {
                 return URL(imagesBase)
             } catch (_: MalformedURLException) {
-                
+
             }
         }
         return getURLPref(this, TreebolicIface.PREF_IMAGEBASE)
@@ -550,9 +552,11 @@ abstract class TreebolicBasicActivity protected constructor(
      */
     private fun snackbar(message: String, duration: Int) {
         runOnUiThread {
-            val snack: Snackbar = Snackbar.make(widget as View, message, duration)
-            snack.view.setBackgroundColor(ContextCompat.getColor(this@TreebolicBasicActivity, R.color.snackbar_color))
-            snack.show()
+            val colors = fetchColors(this, MaterialR.attr.colorPrimaryContainer, MaterialR.attr.colorOnPrimaryContainer)
+            Snackbar.make(widget as View, message, duration)
+                .setBackgroundTint(colors[0])
+                .setTextColor(colors[1])
+                .show()
         }
     }
 
