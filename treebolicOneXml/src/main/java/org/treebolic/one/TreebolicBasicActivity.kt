@@ -24,8 +24,8 @@ import androidx.core.content.edit
 import androidx.core.net.toUri
 import androidx.preference.PreferenceManager
 import com.google.android.material.snackbar.Snackbar
+import org.treebolic.ActionBarColorUtils.getActionBarForegroundColorFromTheme
 import org.treebolic.AppCompatCommonActivity
-import org.treebolic.ColorUtils.fetchColor
 import org.treebolic.ColorUtils.fetchColors
 import org.treebolic.TreebolicIface
 import org.treebolic.guide.AboutActivity
@@ -34,7 +34,6 @@ import org.treebolic.guide.Tip
 import org.treebolic.one.Settings.getURLPref
 import org.treebolic.one.xml.BuildConfig
 import org.treebolic.one.xml.R
-import org.treebolic.search.ColorUtils.getActionBarForegroundColorFromTheme
 import org.treebolic.search.ColorUtils.tint
 import org.treebolic.search.SearchSettings
 import treebolic.IContext
