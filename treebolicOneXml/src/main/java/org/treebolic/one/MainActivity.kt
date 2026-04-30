@@ -190,7 +190,7 @@ open class MainActivity : AppCompatCommonActivity(), View.OnClickListener {
 
             R.id.action_download -> {
                 val intent = Intent(this, DownloadActivity::class.java)
-                intent.putExtra(org.treebolic.download.DownloadActivity.ARG_ALLOW_EXPAND_ARCHIVE, true)
+                intent.putExtra(org.treebolic.download.BaseDownloadActivity.ARG_ALLOW_EXPAND_ARCHIVE, true)
                 activityDownloadResultLauncher!!.launch(intent)
                 return true
             }
