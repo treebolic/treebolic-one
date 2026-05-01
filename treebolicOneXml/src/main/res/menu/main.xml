@@ -78,6 +78,10 @@
 		app:showAsAction="never">
 		<menu>
 			<item
+				android:id="@+id/action_version"
+				android:title="@string/title_version"
+				app:showAsAction="never" />
+			<item
 				android:id="@+id/action_app_settings"
 				android:title="@string/title_activity_app_settings"
 				app:showAsAction="never" />

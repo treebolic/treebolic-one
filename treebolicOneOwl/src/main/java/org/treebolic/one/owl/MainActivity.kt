@@ -41,6 +41,8 @@ import treebolic.glue.component.Dialog
 import treebolic.glue.component.Statusbar
 import java.io.File
 import androidx.core.content.edit
+import org.treebolic.Version.appVersion
+import org.treebolic.dialog
 
 /**
  * Treebolic main activity (home)
@@ -105,11 +107,10 @@ class MainActivity : AppCompatCommonActivity(), View.OnClickListener {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val itemId = item.itemId
-        when (itemId) {
+        return when (item.itemId) {
             R.id.action_run -> {
                 tryStartTreebolic(null)
-                return true
+                true
             }
 
             R.id.action_reset -> {
@@ -119,67 +120,73 @@ class MainActivity : AppCompatCommonActivity(), View.OnClickListener {
                 Settings.setDefaults(this)
                 Log.d(TAG, "data reset from internal source")
                 expandZipAssetFile(this, "data.zip")
+                false
             }
 
             R.id.action_download -> {
                 val intent = Intent(this, DownloadActivity::class.java)
                 intent.putExtra(org.treebolic.download.BaseDownloadActivity.ARG_ALLOW_EXPAND_ARCHIVE, true)
                 activityResultLauncher!!.launch(intent)
-                return true
+                true
             }
 
             R.id.action_settings -> {
                 tryStartTreebolicSettings()
-                return true
+                true
             }
 
             R.id.action_help -> {
                 startActivity(Intent(this, HelpActivity::class.java))
-                return true
+                true
             }
 
             R.id.action_tips -> {
                 show(supportFragmentManager)
-                return true
+                true
             }
 
             R.id.action_about -> {
                 startActivity(Intent(this, AboutActivity::class.java))
-                return true
+                true
+            }
+
+            R.id.action_version -> {
+                dialog(appVersion(this), this)
+                true
             }
 
             R.id.action_others -> {
                 startActivity(Intent(this, OthersActivity::class.java))
-                return true
+                true
             }
 
             R.id.action_donate -> {
                 startActivity(Intent(this, DonateActivity::class.java))
-                return true
+                true
             }
 
             R.id.action_rate -> {
                 rate(this)
-                return true
+                true
             }
 
             R.id.action_app_settings -> {
                 Settings.applicationSettings(this, applicationContext.packageName)
-                return true
+                true
             }
 
             R.id.action_finish -> {
                 finish()
-                return true
+                true
             }
 
             R.id.action_kill -> {
                 Process.killProcess(Process.myPid())
-                return true
+                true
             }
-        }
 
-        return false
+            else -> false
+        }
     }
 
     /**
@@ -234,16 +241,16 @@ class MainActivity : AppCompatCommonActivity(), View.OnClickListener {
         }
         var build: Long = 0
         try {
-            val packageInfo = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) 
-                packageManager.getPackageInfo(packageName, PackageManager.PackageInfoFlags.of(0)) else  
+            val packageInfo = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
+                packageManager.getPackageInfo(packageName, PackageManager.PackageInfoFlags.of(0)) else
                 packageManager.getPackageInfo(packageName, 0)
 
             @Suppress("DEPRECATION")
-            build = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) 
-                packageInfo.longVersionCode else  
+            build = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P)
+                packageInfo.longVersionCode else
                 packageInfo.versionCode.toLong()
         } catch (ignored: PackageManager.NameNotFoundException) {
-            
+
         }
         if (version < build) {
             prefs.edit {
