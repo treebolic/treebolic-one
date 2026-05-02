@@ -22,6 +22,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.edit
 import androidx.fragment.app.Fragment
 import androidx.preference.PreferenceManager
 import com.bbou.donate.DonateActivity
@@ -30,6 +31,10 @@ import com.bbou.rate.AppRate.promptRate
 import com.bbou.rate.AppRate.rate
 import org.treebolic.AppCompatCommonActivity
 import org.treebolic.TreebolicIface
+import org.treebolic.Version.appVersion
+import org.treebolic.Version.buildTime
+import org.treebolic.Version.gitHash
+import org.treebolic.dialog
 import org.treebolic.filechooser.FileChooserActivity.Companion.setFolder
 import org.treebolic.guide.AboutActivity
 import org.treebolic.guide.HelpActivity
@@ -41,9 +46,8 @@ import treebolic.glue.component.Dialog
 import treebolic.glue.component.Statusbar
 import treebolic.provider.sql.SqlProperties
 import java.io.File
-import androidx.core.content.edit
-import org.treebolic.Version.appVersion
-import org.treebolic.dialog
+import org.treebolic.glue.BuildConfig as GlueBuildConfig
+import org.treebolic.one.sql.BuildConfig as LibBuildConfig
 
 /**
  * Treebolic main activity (home)
@@ -157,7 +161,12 @@ class MainActivity : AppCompatCommonActivity(), View.OnClickListener {
             }
 
             R.id.action_version -> {
-                dialog(appVersion(this), this)
+                val v = appVersion(this.applicationContext)
+                    .append(buildTime(LibBuildConfig.BUILD_TIME, "app"))
+                    .append(gitHash(LibBuildConfig.GIT_HASH, "app"))
+                    .append(buildTime(GlueBuildConfig.BUILD_TIME, "glue"))
+                    .append(gitHash(GlueBuildConfig.GIT_HASH, "glue"))
+                dialog(v, this)
                 true
             }
 
