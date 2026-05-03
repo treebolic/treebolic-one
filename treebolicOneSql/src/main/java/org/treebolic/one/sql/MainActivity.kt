@@ -158,7 +158,7 @@ class MainActivity : AppCompatCommonActivity(), View.OnClickListener {
 
             R.id.action_about -> {
                 startActivity(Intent(this, AboutActivity::class.java))
-                return true
+                true
             }
 
             R.id.action_version -> {
