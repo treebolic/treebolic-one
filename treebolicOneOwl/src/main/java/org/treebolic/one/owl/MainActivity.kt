@@ -45,6 +45,7 @@ import org.treebolic.storage.Storage.getTreebolicStorage
 import treebolic.glue.component.Dialog
 import treebolic.glue.component.Statusbar
 import java.io.File
+import org.treebolic.common.BuildConfig as CommonBuildConfig
 import org.treebolic.glue.BuildConfig as GlueBuildConfig
 import org.treebolic.one.owl.BuildConfig as LibBuildConfig
 
@@ -158,6 +159,8 @@ class MainActivity : AppCompatCommonActivity(), View.OnClickListener {
                 val v = appVersion(this.applicationContext)
                     .append(buildTime(LibBuildConfig.BUILD_TIME, "app"))
                     .append(gitHash(LibBuildConfig.GIT_HASH, "app"))
+                    .append(buildTime(CommonBuildConfig.BUILD_TIME, "common"))
+                    .append(gitHash(CommonBuildConfig.GIT_HASH, "common"))
                     .append(buildTime(GlueBuildConfig.BUILD_TIME, "glue"))
                     .append(gitHash(GlueBuildConfig.GIT_HASH, "glue"))
                 dialog(v, this)
