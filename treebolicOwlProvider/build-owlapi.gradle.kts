@@ -2,25 +2,25 @@ plugins {
     alias(libs.plugins.androidLibrary)
 }
 
-private val vCompileSdk by lazy { rootProject.extra["compileSdk"] as Int }
-private val vMinSdk by lazy { rootProject.extra["minSdk"] as Int }
-
 android {
 
     namespace "treebolic.provider.owl"
 
-    compileSdk = vCompileSdk
+    compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
-        multiDexEnabled true
+        minSdk = libs.versions.minSdk.get().toInt()
+        multiDexEnabled = true
+    }
+
+    buildFeatures {
+        buildConfig = true
     }
 
     compileOptions {
         isCoreLibraryDesugaringEnabled = true
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 }
 
@@ -29,13 +29,16 @@ kotlin {
 }
 
 dependencies {
-    implementation("io.github.treebolic:treebolic-model:${treebolicVersion}")
-    implementation("io.github.treebolic:treebolic-mutable:${treebolicVersion}")
-    implementation("io.github.treebolic:provider-owl-owlapi:${treebolicVersion}")
+    implementation(libs.treebolic.model)
+    implementation(libs.treebolic.mutable)
+    implementation(libs.treebolic-provider-owl-api)
 
     implementation(project(":treebolicGlue"))
 
-    implementation("androidx.annotation:annotation:1.9.1")
+    implementation(libs.annotation)
 
+    implementation(libs.core.ktx)
+    implementation(platform(libs.kotlin.bom))
+    implementation(kotlin("stdlib"))
     coreLibraryDesugaring(libs.desugar)
 }
