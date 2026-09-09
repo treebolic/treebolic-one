@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2026. Bernard Bou
+ */
+
 plugins {
     alias(libs.plugins.androidLibrary)
 }

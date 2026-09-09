@@ -1,3 +1,7 @@
+<!--
+  ~ Copyright (c) 2026. Bernard Bou
+  -->
+
 <resources xmlns:tools="http://schemas.android.com/tools">
 
 	<string name="pref_download_url_default" translatable="false" tools:keep="@string/pref_download_url_default">http://treebolic.sourceforge.net/data/template/data.zip</string>

@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2026. Bernard Bou
+ */
+
 import java.io.FileInputStream
 import java.util.Properties
 

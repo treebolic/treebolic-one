@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2026. Bernard Bou
+  -->
+
 <resources>
 
 	<string name="source_default" translatable="false">sumo.owl</string>

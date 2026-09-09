@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2026. Bernard Bou
+ */
+
 import java.text.SimpleDateFormat
 import java.util.Date
 
