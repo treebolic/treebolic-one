@@ -37,6 +37,7 @@ class DownloadActivity : BaseDownloadActivity() {
                 putExtra(ARG_FRAGMENT, SettingsActivity.DownloadPreferenceFragment::class.java.name)
             }
             startActivity(intent)
+            finish()
         }
     }
 
