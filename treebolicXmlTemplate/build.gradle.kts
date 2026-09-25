@@ -9,7 +9,7 @@ plugins {
     alias(libs.plugins.androidApplication)
 }
 
-val keystorePropertiesFile: File = rootProject.file("keystore.properties")
+val keystorePropertiesFile: File = rootProject.file("keystore_template.properties")
 val keystoreProperties: Properties = Properties()
 keystoreProperties.load(FileInputStream(keystorePropertiesFile))
 
@@ -30,7 +30,7 @@ android {
     }
 
     signingConfigs {
-        create("treebolic") {
+        create("release") {
             keyAlias = keystoreProperties.getProperty("keyAlias")
             keyPassword = keystoreProperties.getProperty("keyPassword")
             storeFile = file(keystoreProperties.getProperty("storeFile"))
@@ -42,7 +42,7 @@ android {
         release {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.txt")
-            signingConfig = signingConfigs.getByName("treebolic")
+            signingConfig = signingConfigs.getByName("release")
             versionNameSuffix = "signed"
         }
     }
